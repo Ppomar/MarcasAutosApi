@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: marcas_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: Autos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Postgres@Admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: marcas_api
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__MainConnectionString: Host=postgres;Port=5432;Database=Autos;Username=postgres;Password=Postgres@Admin
+    ports:
+      - "5000:8080"
+
+volumes:
+  postgres_data:

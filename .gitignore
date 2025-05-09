@@ -1,0 +1,16 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Archivos de build
+bin/
+obj/
+
+# Sistema
+Thumbs.db
+*.log
+
+# Entornos y secretos
+.env
+.env.*
